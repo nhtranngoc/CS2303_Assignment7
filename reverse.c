@@ -19,6 +19,13 @@ void usage () {
  */
 
 void reversestring(char* s) {
+  int i;
+  int length = strlen(s);
+  for(i=0;i<length/2;i++){
+    char buf = s[i];
+    s[i] = s[length-i-1];
+    s[length-i-1]=buf;
+  }
 }
 
 /** Reverses all the words in a string, in place.
@@ -26,6 +33,17 @@ void reversestring(char* s) {
  * @param s String with words to reverse.
  */
 void reversewords(char* s) {
+  reversestring(s);
+  char * pch=s;
+  while (pch != NULL){
+    pch = strtok(NULL, " ");
+    if(pch != '\0'){
+      char* buf = pch;
+      reversestring(buf);
+      strcat(s, buf);
+      strcat(s, " ");
+    }
+  }
 }
 
 /** Must take exactly one argument.
